@@ -3,23 +3,159 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.sakatap.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.sakatap.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/souvenirFragment"
+        android:name="com.example.sakatap.ui.souvenir.SouvenirFragment"
+        android:label="fragment_souvenir"
+        tools:layout="@layout/fragment_souvenir" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.sakatap.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/mapFragment"
+        android:name="com.example.sakatap.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.sakatap.ui.Profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.example.sakatap.ui.overview.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment_to_gapuraUtamaFragment"
+            app:destination="@id/gapuraUtamaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.sakatap.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_nfcFragment"
+            app:destination="@id/nfcFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.sakatap.ui.signup.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/gapuraUtamaFragment"
+        android:name="com.example.sakatap.ui.tempat.GapuraUtamaFragment"
+        android:label="fragment_gapura_utama"
+        tools:layout="@layout/fragment_gapura_utama" >
+        <action
+            android:id="@+id/action_gapuraUtamaFragment_to_sejarahPenghunianFragment"
+            app:destination="@id/sejarahPenghunianFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sejarahPenghunianFragment"
+        android:name="com.example.sakatap.ui.tempat.SejarahPenghunianFragment"
+        android:label="fragment_sejarah_penghunian"
+        tools:layout="@layout/fragment_sejarah_penghunian" >
+        <action
+            android:id="@+id/action_sejarahPenghunianFragment_to_gapuraKeduaFragment"
+            app:destination="@id/gapuraKeduaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gapuraKeduaFragment"
+        android:name="com.example.sakatap.ui.tempat.GapuraKeduaFragment"
+        android:label="fragment_gapura_kedua"
+        tools:layout="@layout/fragment_gapura_kedua" >
+        <action
+            android:id="@+id/action_gapuraKeduaFragment_to_candiPembakaranFragment"
+            app:destination="@id/candiPembakaranFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/candiPembakaranFragment"
+        android:name="com.example.sakatap.ui.tempat.CandiPembakaranFragment"
+        android:label="fragment_candi_pembakaran"
+        tools:layout="@layout/fragment_candi_pembakaran" >
+        <action
+            android:id="@+id/action_candiPembakaranFragment_to_pasebanFragment"
+            app:destination="@id/pasebanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pasebanFragment"
+        android:name="com.example.sakatap.ui.tempat.PasebanFragment"
+        android:label="fragment_paseban"
+        tools:layout="@layout/fragment_paseban" >
+        <action
+            android:id="@+id/action_pasebanFragment_to_umpakFragment"
+            app:destination="@id/umpakFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/umpakFragment"
+        android:name="com.example.sakatap.ui.tempat.UmpakFragment"
+        android:label="fragment_umpak"
+        tools:layout="@layout/fragment_umpak" >
+        <action
+            android:id="@+id/action_umpakFragment_to_pendapaFragment"
+            app:destination="@id/pendapaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pendapaFragment"
+        android:name="com.example.sakatap.ui.tempat.PendapaFragment"
+        android:label="fragment_pendapa"
+        tools:layout="@layout/fragment_pendapa" >
+        <action
+            android:id="@+id/action_pendapaFragment_to_keputrenFragment"
+            app:destination="@id/keputrenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/keputrenFragment"
+        android:name="com.example.sakatap.ui.tempat.KeputrenFragment"
+        android:label="fragment_keputren"
+        tools:layout="@layout/fragment_keputren" >
+        <action
+            android:id="@+id/action_keputrenFragment_to_guaFragment"
+            app:destination="@id/guaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guaFragment"
+        android:name="com.example.sakatap.ui.tempat.GuaFragment"
+        android:label="fragment_gua"
+        tools:layout="@layout/fragment_gua" >
+        <action
+            android:id="@+id/action_guaFragment_to_turSelesaiFragment"
+            app:destination="@id/turSelesaiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nfcFragment"
+        android:name="com.example.sakatap.ui.nfc.NfcFragment"
+        android:label="fragment_nfc"
+        tools:layout="@layout/fragment_nfc" >
+        <action
+            android:id="@+id/action_nfcFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/turSelesaiFragment"
+        android:name="com.example.sakatap.ui.Selesai.TurSelesaiFragment"
+        android:label="fragment_tur_selesai"
+        tools:layout="@layout/fragment_tur_selesai" >
+        <action
+            android:id="@+id/action_turSelesaiFragment_to_souvenirFragment"
+            app:destination="@id/souvenirFragment" />
+        <action
+            android:id="@+id/action_turSelesaiFragment_to_navigation_home2"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
 </navigation>
