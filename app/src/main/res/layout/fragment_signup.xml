@@ -1,14 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2E3049"
     tools:context=".ui.signup.SignupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_username"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_nama" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_jenis_kelamin"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Jenis Kelamin"
+        android:inputType="textPersonName"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_tempat_tanggal_lahir" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_tempat_tanggal_lahir"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Tempat dan Tanggal lahir"
+        android:inputType="date"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_password" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_password"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_email" />
+
+    <TextView
+        android:id="@+id/signup_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="Sudah punya akun ? Masuk"
+        android:textColor="#EDEEFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_signup" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_email"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_username" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signup_signup"
+        android:layout_width="230dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="52dp"
+        android:text="Buat Akun"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF953F"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_jenis_kelamin" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/signup_nama"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="36dp"
+        android:background="#414260"
+        android:ems="10"
+        android:hint="Nama"
+        android:inputType="textPersonName"
+        android:textColor="#EDEEFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_sakatap" />
+
+    <ImageView
+        android:id="@+id/signup_logo"
+        android:layout_width="51dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/logo_sakatap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/signup_sakatap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="116dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/sakatap"
+        android:textColor="#FF953F"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/signup_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

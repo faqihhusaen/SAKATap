@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "807055097386",
+    "project_id": "sakatap-6323d",
+    "storage_bucket": "sakatap-6323d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807055097386:android:41fce3584bc849354f0d53",
+        "android_client_info": {
+          "package_name": "com.example.sakatap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807055097386-h5s516u07dm0e77uk61agt1d2d9ghlh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyw1a4Aj8Cz6Qxn_EEvyLOIUky20ackqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807055097386-h5s516u07dm0e77uk61agt1d2d9ghlh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

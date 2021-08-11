@@ -1,14 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.souvenir.SouvenirFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/souvenir_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="#414260"
+        app:title="Souvenir"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity=""
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/souvenir_ambil3"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/nama1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toRightOf="@id/souvenir_ambil2"
+            android:text="Button"
+            android:textSize="10sp"
+            app:backgroundTint="#FF953F" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/souvenir_ambil2"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/nama1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="37dp"
+            android:layout_toRightOf="@id/souvenir_ambil1"
+            android:text="Button"
+            android:textSize="10sp"
+            app:backgroundTint="#FF953F" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/souvenir_ambil1"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_below="@id/nama1"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="37dp"
+            android:text="Button"
+            android:textSize="10sp"
+            app:backgroundTint="#FF953F" />
+
+        <TextView
+            android:id="@+id/souvenir_text_poin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/souvenir_poin"
+            android:layout_alignParentLeft="false"
+            android:layout_marginEnd="35dp"
+            android:text="Poin :"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/souvenir_poin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="1dp"
+            android:text="800"
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/souvenir1"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_below="@id/souvenir_poin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:clickable="true"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/souvenir2"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_below="@id/souvenir_poin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toRightOf="@id/souvenir1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:clickable="true"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/souvenir3"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_below="@id/souvenir_poin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toRightOf="@id/souvenir2"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:clickable="true"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/nama1"
+            android:layout_width="80dp"
+            android:layout_height="29dp"
+            android:layout_below="@id/souvenir1"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginRight="12dp"
+            android:text="Sri Maharaja"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/nama2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/souvenir1"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="37dp"
+            android:layout_toRightOf="@id/nama1"
+            android:text="Hino"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/nama3"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/souvenir1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toRightOf="@id/nama2"
+            android:text="Sirikan"
+            android:textAlignment="center"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

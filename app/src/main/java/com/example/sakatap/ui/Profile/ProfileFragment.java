@@ -2,60 +2,37 @@ package com.example.sakatap.ui.Profile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.sakatap.Models.Users;
 import com.example.sakatap.R;
+import com.example.sakatap.ui.overview.OverviewViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private ProfileViewModel viewModel;
+    private ImageView foto;
+    private TextView tombol_ubah;
+    private TextView tombol_keluar;
+    private TextView text_username;
+    private TextView text_email;
+    private TextView text_nama;
+    private TextView text_kelamin;
+    private TextView text_TTL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +40,57 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        foto = getView().findViewById(R.id.profil_foto);
+        tombol_ubah = getView().findViewById(R.id.profil_ubahpass);
+        tombol_keluar = getView().findViewById(R.id.profil_keluar);
+        text_username = getView().findViewById(R.id.usernameprofile);
+        text_email = getView().findViewById(R.id.emailprofil);
+        text_nama = getView().findViewById(R.id.namaprofil);
+        text_kelamin = getView().findViewById(R.id.kelaminprofil);
+        text_TTL = getView().findViewById(R.id.TTLprofil);
+
+        tombol_ubah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.ubahPasswordFragment);
+            }
+        });
+
+        tombol_keluar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.logout();
+                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.awalFragment);
+            }
+        });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+        viewModel.getuserdata();
+        viewModel.getUserdata().observe(ProfileFragment.this, new Observer<Users>() {
+            @Override
+            public void onChanged(Users users) {
+                text_username.setText(users.getUsername());
+                text_email.setText(users.getEmail());
+                text_nama.setText(users.getNama());
+                text_kelamin.setText(users.getKelamin());
+                text_TTL.setText(users.getTTL());
+            }
+        });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+
 }

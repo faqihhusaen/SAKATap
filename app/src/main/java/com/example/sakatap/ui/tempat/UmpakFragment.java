@@ -1,66 +1,186 @@
 package com.example.sakatap.ui.tempat;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sakatap.Adapter.ImageAdapter;
+import com.example.sakatap.Models.Bangunan;
 import com.example.sakatap.R;
+import com.example.sakatap.ui.overview.OverviewFragment;
+import com.example.sakatap.ui.overview.OverviewViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UmpakFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.io.IOException;
+import java.util.List;
+
 public class UmpakFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private UmpakViewModel viewModel;
+    private ViewPager foto_situs;
+    private Button tombol_next;
+    private ImageButton tombol_play;
+    private ImageButton tombol_pause;
+    private TextView text_narasi;
+    private int length;
+    private ImageAdapter adapter;
+    OnDataPass dataPasser;
+    private MediaPlayer mediaPlayer;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private final String path = "umpak";
+    private final String audiopath = "Narasi/17Umpak_Batu.mp3";
+    private final String guidepath = "Guide/Guide8.mp3";
 
-    public UmpakFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UmpakFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UmpakFragment newInstance(String param1, String param2) {
-        UmpakFragment fragment = new UmpakFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public interface OnDataPass {
+        public void onDataPass(String data);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        dataPasser = (OnDataPass) context;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        viewModel = new ViewModelProvider(requireActivity()).get(UmpakViewModel.class);
+        passData("umpak");
+        length = -1;
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        viewModel.getnarasi("Umpak_batu");
+        viewModel.getNarasi().observe(UmpakFragment.this, new Observer<Bangunan>() {
+            @Override
+            public void onChanged(Bangunan bangunan) {
+                if (bangunan != null) {
+                    String judul = bangunan.getJudul();
+                    String narasi = bangunan.getNarasi();
+                    narasi = narasi.replace("\\n", "\n");
+                    String hasil = judul + "\n\n" + narasi;
+                    text_narasi.setText(hasil);
+                }
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_umpak, container, false);
+        View view = inflater.inflate(R.layout.fragment_umpak, container, false);
+        foto_situs = view.findViewById(R.id.umpak_foto_situs);
+        viewModel.getlistimageurl(path);
+        viewModel.getListimageurl().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                String[] arr = new String[strings.size()];
+                arr = strings.toArray(arr);
+                adapter = new ImageAdapter(getActivity(), arr);
+                foto_situs.setAdapter(adapter);
+            }
+        });
+
+        return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tombol_next = getView().findViewById(R.id.umpak_next);
+        tombol_play = getView().findViewById(R.id.umpak_play_button);
+        tombol_pause = getView().findViewById(R.id.umpak_pause_button);
+        text_narasi = getView().findViewById(R.id.umpak_narasi);
+
+        tombol_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+                mediaPlayer.reset();
+                mediaPlayer.release();
+                int nextid = R.id.action_guideFragment_to_pasebanFragment;
+                Bundle bundle = new Bundle();
+                bundle.putString("guide", "Umpak_batu");
+                bundle.putString("audio", guidepath );
+                bundle.putInt("id", nextid );
+                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.action_umpakFragment_to_guideFragment, bundle);
+            }
+        });
+
+        tombol_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(length == -1) {
+                    viewModel.getaudiourl(audiopath);
+                    viewModel.getAudiourl().observe(getViewLifecycleOwner(), new Observer<Uri>() {
+                        @Override
+                        public void onChanged(Uri uri) {
+                            try {
+                                mediaPlayer.setDataSource(getActivity(), uri);
+                                mediaPlayer.prepare();
+                                mediaPlayer.start();
+                            } catch (IOException e) {
+                                Toast.makeText(getContext(), "Terjadi kesalahan pemutaran audio" + e, Toast.LENGTH_SHORT).show();
+                                Log.d("AUDIO", "Error memutar audio", e);
+                            }
+                        }
+                    });
+                }
+                else {
+                    if (!mediaPlayer.isPlaying()) {
+                        mediaPlayer.seekTo(length);
+                        mediaPlayer.start();
+                    }
+                }
+            }
+        });
+
+        tombol_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    length = mediaPlayer.getCurrentPosition();
+                }
+                else {
+                    Toast.makeText(getContext(), "Audio belum dimainkan", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+    }
+
+    public void passData(String data) {
+        dataPasser.onDataPass(data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+
 }
