@@ -1,4 +1,4 @@
-package com.example.sakatap.ui.tempat;
+package com.example.sakatap.ui.overview;
 
 import android.app.Application;
 import android.net.Uri;
@@ -8,26 +8,27 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sakatap.Models.Bangunan;
+import com.example.sakatap.Models.ImageURL;
 import com.example.sakatap.repository.repository;
 
 import java.util.List;
 
-public class PendapaViewModel extends AndroidViewModel {
+public class TurViewModel extends AndroidViewModel {
 
-    private com.example.sakatap.repository.repository repository;
+    private repository repository;
     private MutableLiveData<Uri> Imageurl;
     private MutableLiveData<Bangunan> narasi;
     private MutableLiveData<Uri> audiourl;
     private MutableLiveData<List<String>> listimageurl;
 
-    public PendapaViewModel(@NonNull Application application) {
+    public TurViewModel(@NonNull Application application) {
         super(application);
 
         repository = new repository(application);
         narasi = repository.getData();
         Imageurl = repository.getImageurl();
-        audiourl = repository.getAudiourl();
         listimageurl = repository.getListimageurl();
+        audiourl = repository.getAudiourl();
     }
 
     public void getnarasi(String documentid) {
@@ -42,8 +43,8 @@ public class PendapaViewModel extends AndroidViewModel {
         repository.getlistimageurl(path);
     }
 
-    public void getaudiourl(String nama) {
-        repository.getAudiourluri(nama);
+    public void getaudiourl(String path) {
+        repository.getAudiourluri(path);
     }
 
     public MutableLiveData<Uri> getImageurl() {

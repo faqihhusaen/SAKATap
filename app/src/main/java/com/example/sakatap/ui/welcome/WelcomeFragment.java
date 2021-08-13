@@ -19,12 +19,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.sakatap.R;
+import com.example.sakatap.ShareViewModel;
 import com.example.sakatap.ui.login.LoginViewModel;
 
 
 public class WelcomeFragment extends Fragment {
 
     private WelcomeViewModel viewModel;
+    private ShareViewModel shareViewModel;
     private Button tombol_mulai_tur;
 
     @Override
@@ -88,6 +90,8 @@ public class WelcomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(WelcomeViewModel.class);
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        shareViewModel.send(0);
     }
 
     @Override

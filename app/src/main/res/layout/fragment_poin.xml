@@ -8,43 +8,44 @@
     tools:context=".ui.poin.PoinFragment">
 
     <TextView
-        android:id="@+id/poin_poin3"
+        android:id="@+id/poin_poin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="Anda dapat menukarkan poin\ndengan souvenir menarik\ndi bagian Souvenir"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:layout_marginTop="24dp"
+        android:text="POIN"
+        android:textColor="#FF953F"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/poin_poin" />
 
     <TextView
-        android:id="@+id/poin_poin2"
+        android:id="@+id/poin_petunjuk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
-        android:text="Selamat, anda mendapatkan"
+        android:layout_marginTop="100dp"
+        android:text="Anda dapat menukarkan poin\ndengan souvenir menarik\ndi bagian Souvenir"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/poin_poin2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/poin_next"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp"
-        android:text="Ulangi Tur"
+        android:layout_marginTop="68dp"
+        android:text="Souvenir"
         android:textColor="@color/black"
         app:backgroundTint="#FF953F"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poin_poin3" />
+        app:layout_constraintTop_toBottomOf="@+id/poin_petunjuk" />
 
     <TextView
         android:id="@+id/poin_poin"
@@ -52,10 +53,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textColor="#FF953F"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="151dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/rewardpoin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poin_poin2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

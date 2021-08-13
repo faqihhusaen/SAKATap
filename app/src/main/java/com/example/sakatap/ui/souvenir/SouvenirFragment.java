@@ -181,37 +181,7 @@ public class SouvenirFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(SouvenirViewModel.class);
 
-        viewModel.getsouvenir();
-        viewModel.getSouvenir().observe(SouvenirFragment.this, new Observer<List<Souvenir>>() {
-            @Override
-            public void onChanged(List<Souvenir> souvenirs) {
-                nama_souvenir1 = souvenirs.get(0).getNama();
-                nama_souvenir2 = souvenirs.get(1).getNama();
-                nama_souvenir3 = souvenirs.get(2).getNama();
-                harga_souvenir1 = souvenirs.get(0).getHarga();
-                harga_souvenir2 = souvenirs.get(1).getHarga();
-                harga_souvenir3 = souvenirs.get(2).getHarga();
-                image_souvenir1 = souvenirs.get(0).getImage();
-                image_souvenir2 = souvenirs.get(1).getImage();
-                image_souvenir3 = souvenirs.get(2).getImage();
-                animasi_souvenir1 = souvenirs.get(0).getAnimasi();
-                animasi_souvenir2 = souvenirs.get(1).getAnimasi();
-                animasi_souvenir3 = souvenirs.get(2).getAnimasi();
-
-                nama1.setText(nama_souvenir1);
-                nama2.setText(nama_souvenir2);
-                nama3.setText(nama_souvenir3);
-
-                ambil1.setText(String.valueOf(harga_souvenir1));
-                ambil2.setText(String.valueOf(harga_souvenir2));
-                ambil3.setText(String.valueOf(harga_souvenir3));
-
-                Picasso.get().load(image_souvenir1).into(souvenir1);
-                Picasso.get().load(image_souvenir2).into(souvenir2);
-                Picasso.get().load(image_souvenir3).into(souvenir3);
-
-            }
-        });
+        loadsouvenir();
         GetUserSouvenir();
         getpoin();
     }
@@ -235,6 +205,7 @@ public class SouvenirFragment extends Fragment {
                 if(userSouvenir.getSouvenir1() == false) {
                     ambil1.setClickable(true);
                     souvenir1.setClickable(false);
+                    ambil1.setText(String.valueOf(harga_souvenir1));
                 }
                 else if(userSouvenir.getSouvenir1() == true) {
                     ambil1.setClickable(false);
@@ -244,6 +215,7 @@ public class SouvenirFragment extends Fragment {
                 if(userSouvenir.getSouvenir2() == false) {
                     ambil2.setClickable(true);
                     souvenir2.setClickable(false);
+                    ambil2.setText(String.valueOf(harga_souvenir2));
                 }
                 else if(userSouvenir.getSouvenir2() == true) {
                     ambil2.setClickable(false);
@@ -253,6 +225,7 @@ public class SouvenirFragment extends Fragment {
                 if(userSouvenir.getSouvenir3() == false) {
                     ambil3.setClickable(true);
                     souvenir3.setClickable(false);
+                    ambil3.setText(String.valueOf(harga_souvenir3));
                 }
                 else if(userSouvenir.getSouvenir3() == true) {
                     ambil3.setClickable(false);
@@ -264,10 +237,43 @@ public class SouvenirFragment extends Fragment {
 
     }
 
+    public void loadsouvenir() {
+        viewModel.getsouvenir();
+        viewModel.getSouvenir().observe(SouvenirFragment.this, new Observer<List<Souvenir>>() {
+            @Override
+            public void onChanged(List<Souvenir> souvenirs) {
+                nama_souvenir1 = souvenirs.get(0).getNama();
+                nama_souvenir2 = souvenirs.get(1).getNama();
+                nama_souvenir3 = souvenirs.get(2).getNama();
+                harga_souvenir1 = souvenirs.get(0).getHarga();
+                harga_souvenir2 = souvenirs.get(1).getHarga();
+                harga_souvenir3 = souvenirs.get(2).getHarga();
+                image_souvenir1 = souvenirs.get(0).getImage();
+                image_souvenir2 = souvenirs.get(1).getImage();
+                image_souvenir3 = souvenirs.get(2).getImage();
+                animasi_souvenir1 = souvenirs.get(0).getAnimasi();
+                animasi_souvenir2 = souvenirs.get(1).getAnimasi();
+                animasi_souvenir3 = souvenirs.get(2).getAnimasi();
+
+                nama1.setText(nama_souvenir1);
+                nama2.setText(nama_souvenir2);
+                nama3.setText(nama_souvenir3);
+
+                Picasso.get().load(image_souvenir1).into(souvenir1);
+                Picasso.get().load(image_souvenir2).into(souvenir2);
+                Picasso.get().load(image_souvenir3).into(souvenir3);
+
+            }
+        });
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        loadsouvenir();
+        getpoin();
+        GetUserSouvenir();
     }
 
 }

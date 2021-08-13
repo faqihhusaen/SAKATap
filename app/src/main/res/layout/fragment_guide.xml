@@ -30,9 +30,24 @@
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintStart_toEndOf="@+id/guide_back"
+        app:layout_constraintTop_toBottomOf="@+id/guide_petunjuk"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/guide_back"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:text="Sebelumnya"
+        android:textColor="@color/black"
+        app:backgroundTint="#FF953F"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guide_petunjuk" />
+        app:layout_constraintTop_toBottomOf="@+id/guide_petunjuk"
+        app:layout_constraintVertical_bias="0.51" />
 
     <ImageButton
         android:id="@+id/guide_play_button"

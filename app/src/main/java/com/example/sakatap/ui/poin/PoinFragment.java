@@ -17,12 +17,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.sakatap.R;
+import com.example.sakatap.ShareViewModel;
 import com.example.sakatap.ui.guide.GuideViewModel;
 
 
 public class PoinFragment extends Fragment {
 
     private PoinViewModel viewModel;
+    private ShareViewModel shareViewModel;
     private Button tombol_next;
     private TextView text_poin;
     private int jumlah_poin;
@@ -46,27 +48,26 @@ public class PoinFragment extends Fragment {
                 return false;
             }
         });
+
+        tombol_next = view.findViewById(R.id.poin_next);
+        text_poin = view.findViewById(R.id.poin_poin);
+
+        tombol_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareViewModel.reset();
+                viewModel.addpoin(jumlah_poin, 1);
+                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.action_poinFragment_to_souvenirFragment);
+            }
+        });
+
+        text_poin.setText(String.valueOf(jumlah_poin));
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        tombol_next = getView().findViewById(R.id.poin_next);
-        text_poin = getView().findViewById(R.id.poin_poin);
-
-        tombol_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.action_poinFragment_to_welcomeFragment);
-            }
-        });
-
-        jumlah_poin = 500;
-        String hasil = jumlah_poin + " Poin";
-        text_poin.setText(hasil);
-        viewModel.addpoin(jumlah_poin, 1);
     }
 
     @Override
@@ -74,6 +75,8 @@ public class PoinFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(PoinViewModel.class);
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        jumlah_poin = 500;
 
     }
 
