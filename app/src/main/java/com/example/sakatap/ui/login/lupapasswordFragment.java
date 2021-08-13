@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sakatap.R;
-import com.example.sakatap.ui.overview.OverviewViewModel;
 
 
 public class lupapasswordFragment extends Fragment {

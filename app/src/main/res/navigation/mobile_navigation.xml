@@ -23,51 +23,12 @@
             app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
-        android:id="@+id/overviewFragment"
-        android:name="com.example.sakatap.ui.overview.OverviewFragment"
-        android:label="fragment_umpak"
-        tools:layout="@layout/fragment_umpak" >
-        <action
-            android:id="@+id/action_overviewFragment_to_gapuraPertamaFragment"
-            app:destination="@id/gapuraPertamaFragment" />
+        android:id="@+id/turFragment"
+        android:name="com.example.sakatap.ui.overview.TurFragment"
+        android:label="fragment_Tur"
+        tools:layout="@layout/fragment_tur">
         <action
             android:id="@+id/action_overviewFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/candiMiniaturFragment"
-        android:name="com.example.sakatap.ui.tempat.CandiMiniaturFragment"
-        android:label="CandiMiniaturFragment"
-        tools:layout="@layout/fragment_candi_miniatur">
-        <action
-            android:id="@+id/action_candiMiniaturFragment_to_kolamKeputrenFragment"
-            app:destination="@id/kolamKeputrenFragment" />
-        <action
-            android:id="@+id/action_candiMiniaturFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/pasebanFragment"
-        android:name="com.example.sakatap.ui.tempat.PasebanFragment"
-        android:label="PasebanFragment"
-        tools:layout="@layout/fragment_paseban">
-        <action
-            android:id="@+id/action_pasebanFragment_to_pendapaFragment"
-            app:destination="@id/pendapaFragment" />
-        <action
-            android:id="@+id/action_pasebanFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/candiPembakaranFragment"
-        android:name="com.example.sakatap.ui.tempat.CandiPembakaranFragment"
-        android:label="CandiPembakaranFragment"
-        tools:layout="@layout/fragment_candi_pembakaran">
-        <action
-            android:id="@+id/action_candiPembakaranFragment_to_umpakFragment"
-            app:destination="@id/umpakFragment" />
-        <action
-            android:id="@+id/action_candiPembakaranFragment_to_guideFragment"
             app:destination="@id/guideFragment" />
     </fragment>
     <fragment
@@ -125,100 +86,7 @@
         tools:layout="@layout/fragment_nfc_awal" >
         <action
             android:id="@+id/action_nfcAwalFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/gapuraPertamaFragment"
-        android:name="com.example.sakatap.ui.tempat.GapuraPertamaFragment"
-        android:label="fragment_gapura_utama"
-        tools:layout="@layout/fragment_gapura_utama" >
-        <action
-            android:id="@+id/action_gapuraPertamaFragment_to_sejarahPenghunianFragment"
-            app:destination="@id/sejarahPenghunianFragment" />
-        <action
-            android:id="@+id/action_gapuraPertamaFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/sejarahPenghunianFragment"
-        android:name="com.example.sakatap.ui.tempat.SejarahPenghunianFragment"
-        android:label="fragment_sejarah_penghunian"
-        tools:layout="@layout/fragment_sejarah_penghunian" >
-        <action
-            android:id="@+id/action_sejarahPenghunianFragment_to_gapuraKeduaFragment"
-            app:destination="@id/gapuraKeduaFragment" />
-        <action
-            android:id="@+id/action_sejarahPenghunianFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/gapuraKeduaFragment"
-        android:name="com.example.sakatap.ui.tempat.GapuraKeduaFragment"
-        android:label="fragment_gapura_kedua"
-        tools:layout="@layout/fragment_gapura_kedua" >
-        <action
-            android:id="@+id/action_gapuraKeduaFragment_to_taludFragment"
-            app:destination="@id/taludFragment" />
-        <action
-            android:id="@+id/action_gapuraKeduaFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/taludFragment"
-        android:name="com.example.sakatap.ui.tempat.TaludFragment"
-        android:label="fragment_talud"
-        tools:layout="@layout/fragment_talud" >
-        <action
-            android:id="@+id/action_taludFragment_to_candiPembakaranFragment"
-            app:destination="@id/candiPembakaranFragment" />
-        <action
-            android:id="@+id/action_taludFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/umpakFragment"
-        android:name="com.example.sakatap.ui.tempat.UmpakFragment"
-        android:label="fragment_umpak"
-        tools:layout="@layout/fragment_umpak" >
-        <action
-            android:id="@+id/action_umpakFragment_to_pasebanFragment"
-            app:destination="@id/pasebanFragment" />
-        <action
-            android:id="@+id/action_umpakFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/pendapaFragment"
-        android:name="com.example.sakatap.ui.tempat.PendapaFragment"
-        android:label="fragment_pendapa"
-        tools:layout="@layout/fragment_pendapa" >
-        <action
-            android:id="@+id/action_pendapaFragment_to_candiMiniaturFragment"
-            app:destination="@id/candiMiniaturFragment" />
-        <action
-            android:id="@+id/action_pendapaFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/kolamKeputrenFragment"
-        android:name="com.example.sakatap.ui.tempat.KolamKeputrenFragment"
-        android:label="fragment_keputren"
-        tools:layout="@layout/fragment_keputren" >
-        <action
-            android:id="@+id/action_kolamKeputrenFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-        <action
-            android:id="@+id/action_kolamKeputrenFragment_to_guaFragment"
-            app:destination="@id/guaFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/guaFragment"
-        android:name="com.example.sakatap.ui.tempat.GuaFragment"
-        android:label="fragment_gua"
-        tools:layout="@layout/fragment_gua" >
-        <action
-            android:id="@+id/action_guaFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
+            app:destination="@id/turFragment" />
     </fragment>
     <fragment
         android:id="@+id/guideFragment"
@@ -229,38 +97,8 @@
             android:id="@+id/action_guideFragment_to_nfcAkhirFragment"
             app:destination="@id/nfcAkhirFragment" />
         <action
-            android:id="@+id/action_guideFragment_to_gapuraPertamaFragment"
-            app:destination="@id/gapuraPertamaFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_sejarahPenghunianFragment"
-            app:destination="@id/sejarahPenghunianFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_gapuraKeduaFragment"
-            app:destination="@id/gapuraKeduaFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_taludFragment"
-            app:destination="@id/taludFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_candiPembakaranFragment"
-            app:destination="@id/candiPembakaranFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_umpakFragment"
-            app:destination="@id/umpakFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_pasebanFragment"
-            app:destination="@id/pasebanFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_pendapaFragment"
-            app:destination="@id/pendapaFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_candiMiniaturFragment"
-            app:destination="@id/candiMiniaturFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_kolamKeputrenFragment"
-            app:destination="@id/kolamKeputrenFragment" />
-        <action
-            android:id="@+id/action_guideFragment_to_guaFragment"
-            app:destination="@id/guaFragment" />
+            android:id="@+id/action_guideFragment_to_turFragment"
+            app:destination="@id/turFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"

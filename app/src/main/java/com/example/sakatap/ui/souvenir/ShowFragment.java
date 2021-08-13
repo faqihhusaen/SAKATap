@@ -1,16 +1,12 @@
 package com.example.sakatap.ui.souvenir;
 
-import android.app.ActionBar;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -20,8 +16,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.sakatap.R;
-import com.example.sakatap.ui.overview.OverviewViewModel;
-import com.squareup.picasso.Picasso;
 
 
 public class ShowFragment extends Fragment {

@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,162 +22,153 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sakatap.Models.Bangunan;
 import com.example.sakatap.R;
-import com.example.sakatap.ui.overview.OverviewFragment;
-import com.example.sakatap.ui.overview.OverviewViewModel;
-import com.example.sakatap.ui.tempat.GuaViewModel;
+import com.example.sakatap.ShareViewModel;
 
 import java.io.IOException;
 
 
 public class GuideFragment extends Fragment {
 
-    public interface OnDataPass {
-        public void onDataPass(String data);
-    }
-
-    public interface OnIDPass {
-        public void onIDPass(int id);
-    }
-
-    public interface OnGuidePass {
-        public void onGuidePass(String guide);
-    }
-
-    public interface OnAudioPass {
-        public void onAudioPass(String audio);
-    }
-
     private GuideViewModel viewModel;
+    private ShareViewModel shareViewModel;
     private Button tombol_next;
+    private Button tombol_back;
     private ImageButton tombol_play;
     private TextView text_petunjuk;
-    private int id;
-    private int length;
-    private String guide;
-    private String audio;
     private MediaPlayer mediaPlayer;
-    OnDataPass dataPasser;
-    OnIDPass idpasser;
-    OnGuidePass guidePasser;
-    OnAudioPass audiopasser;
+    private long mLastClickTime = 0;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        dataPasser = (OnDataPass) context;
-        idpasser = (OnIDPass) context;
-        guidePasser = (OnGuidePass) context;
-        audiopasser = (OnAudioPass) context;
-    }
+    private String[] array_guide = {"Overview", "Gapura1", "Sejarah_penghunian", "Gapura2", "Talud", "Candi_pembakaran", "Umpak_batu", "Paseban", "Pendapa", "Candi_miniatur", "Kolam_dan_keputren", "Gua"};
+    private String[] array_guidepath = {"Guide/Guide2.mp3", "Guide/Guide3.mp3", "Guide/Guide4.mp3", "Guide/Guide5.mp3","Guide/Guide6.mp3", "Guide/Guide7.mp3", "Guide/Guide8.mp3", "Guide/Guide9.mp3",
+            "Guide/Guide10.mp3", "Guide/Guide11.mp3", "Guide/Guide12.mp3", "Guide/Guide13.mp3"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(GuideViewModel.class);
-        id = getArguments().getInt("id");
-        guide = getArguments().getString("guide");
-        audio = getArguments().getString("audio");
-        length = -1;
-
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
         mediaPlayer = new MediaPlayer();
-
-        passData("guide");
-        passID(id);
-        passGuide(guide);
-        passAudio(audio);
+        loadguide();
 
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_guide, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tombol_next = getView().findViewById(R.id.guide_next);
-        text_petunjuk = getView().findViewById(R.id.guide_petunjuk);
-        tombol_play = getView().findViewById(R.id.guide_play_button);
+        View view = inflater.inflate(R.layout.fragment_guide, container, false);
+        tombol_next = view.findViewById(R.id.guide_next);
+        tombol_back = view.findViewById(R.id.guide_back);
+        text_petunjuk = view.findViewById(R.id.guide_petunjuk);
+        tombol_play = view.findViewById(R.id.guide_play_button);
 
         tombol_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(id);
+                shareViewModel.increment();
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                shareViewModel.getPosition().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        if(integer == 12) {
+                            Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.nfcAkhirFragment);
+                        }
+                        else {
+                            Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.turFragment);
+                        }
+                    }
+                });
+            }
+        });
+
+        tombol_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareViewModel.decrement();
+                Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.turFragment);
             }
         });
 
         tombol_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getaudiourl(audio);
-                viewModel.getAudiourl().observe(getViewLifecycleOwner(), new Observer<Uri>() {
-                    @Override
-                    public void onChanged(Uri uri) {
-                        try {
-                            mediaPlayer.reset();
-                            mediaPlayer.setDataSource(getActivity(), uri);
-                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                            mediaPlayer.prepare();
-                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                                @Override
-                                public void onPrepared(MediaPlayer playerM){
-                                    mediaPlayer.start();
-                                }
-                            });
-                            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mediaPlayer) {
-                                    mediaPlayer.reset();
-                                }
-                            });
-                        } catch (IOException e) {
-                            Log.d("AUDIO", "Error setDataSourcw audio", e);
-                        }
-                    }
-                });
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                loadaudio();
             }
-
         });
+        return view;
+    }
 
-        viewModel.getguide(guide);
-        viewModel.getGuide().observe(getViewLifecycleOwner(), new Observer<Bangunan>() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    public void loadaudio() {
+        shareViewModel.getPosition().observe(GuideFragment.this, new Observer<Integer>() {
             @Override
-            public void onChanged(Bangunan bangunan) {
-                String hasil = bangunan.getGuide();
-                hasil = hasil.replace("\\n", "\n");
-                text_petunjuk.setText(hasil);
+            public void onChanged(Integer integer) {
+                if(integer < array_guidepath.length) {
+                    viewModel.getaudiourl(array_guidepath[integer]);
+                    viewModel.getAudiourl().observe(GuideFragment.this, new Observer<Uri>() {
+                        @Override
+                        public void onChanged(Uri uri) {
+                            try {
+                                mediaPlayer.reset();
+                                mediaPlayer.setDataSource(getActivity(), uri);
+                                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                                mediaPlayer.prepare();
+                                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+                                    @Override
+                                    public void onPrepared(MediaPlayer playerM){
+                                        mediaPlayer.start();
+                                    }
+                                });
+                            } catch (IOException e) {
+                                Log.d("AUDIO", "Error setDataSourcw audio", e);
+                            }
+
+                        }
+                    });
+                }
             }
         });
     }
 
-    public void passData(String data) {
-        dataPasser.onDataPass(data);
-    }
-
-    public void passID(int id) {
-        idpasser.onIDPass(id);
-    }
-
-    public void passGuide(String guide) {
-        guidePasser.onGuidePass(guide);
-    }
-
-    public void passAudio(String audio) {
-        audiopasser.onAudioPass(audio);
+    public void loadguide() {
+        shareViewModel.getPosition().observe(GuideFragment.this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer < array_guide.length) {
+                    viewModel.getguide(array_guide[integer]);
+                    viewModel.getGuide().observe(GuideFragment.this, new Observer<Bangunan>() {
+                        @Override
+                        public void onChanged(Bangunan bangunan) {
+                            String hasil = bangunan.getGuide();
+                            hasil = hasil.replace("\\n", "\n");
+                            text_petunjuk.setText(hasil);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        loadguide();
     }
 
     @Override
@@ -185,5 +177,9 @@ public class GuideFragment extends Fragment {
         if(mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
+        mediaPlayer.reset();
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
+
 }
