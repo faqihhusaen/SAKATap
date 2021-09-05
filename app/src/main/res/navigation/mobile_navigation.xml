@@ -78,6 +78,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_turFragment"
+            app:destination="@id/turFragment" />
     </fragment>
     <fragment
         android:id="@+id/nfcAwalFragment"

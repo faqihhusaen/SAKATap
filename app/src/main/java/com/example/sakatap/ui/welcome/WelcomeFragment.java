@@ -91,12 +91,29 @@ public class WelcomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(WelcomeViewModel.class);
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
-        shareViewModel.send(0);
+        shareViewModel.getCondition().observe(WelcomeFragment.this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s.equals("tur")) {
+                    Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.action_welcomeFragment_to_turFragment);
+                }
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        viewModel = new ViewModelProvider(requireActivity()).get(WelcomeViewModel.class);
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        shareViewModel.getCondition().observe(WelcomeFragment.this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s.equals("tur")) {
+                    Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.turFragment);
+                }
+            }
+        });
     }
 }

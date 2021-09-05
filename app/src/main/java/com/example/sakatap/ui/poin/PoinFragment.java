@@ -76,6 +76,7 @@ public class PoinFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(PoinViewModel.class);
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        shareViewModel.setCondition("welcome");
         jumlah_poin = 500;
 
     }
