@@ -57,6 +57,7 @@ public class TurFragment extends Fragment {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(TurViewModel.class);
         shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        shareViewModel.setCondition("tur");
         length = -1;
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -117,6 +118,13 @@ public class TurFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        viewModel = new ViewModelProvider(requireActivity()).get(TurViewModel.class);
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        shareViewModel.setCondition("tur");
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        loadnarasi();
+        loadimage();
     }
 
     @Override

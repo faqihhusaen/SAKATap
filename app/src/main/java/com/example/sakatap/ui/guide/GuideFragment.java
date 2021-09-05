@@ -90,7 +90,6 @@ public class GuideFragment extends Fragment {
         tombol_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareViewModel.decrement();
                 Navigation.findNavController(getActivity(), R.id.navHostFragment).navigate(R.id.turFragment);
             }
         });
@@ -168,6 +167,9 @@ public class GuideFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        viewModel = new ViewModelProvider(requireActivity()).get(GuideViewModel.class);
+        shareViewModel = new ViewModelProvider(requireActivity()).get(ShareViewModel.class);
+        mediaPlayer = new MediaPlayer();
         loadguide();
     }
 
